@@ -1,16 +1,32 @@
-Tabii, işte Markdown formatında `README.txt` dosyası:
+# Hoffer Library
 
-```
-# Hoffer Class
+**Hoffer.ts: Network Data Serialization and Deserialization Library**
 
-`Hoffer` is a versatile TypeScript class designed to handle various data types and manage binary data efficiently. It provides methods to write and read different data types such as numbers, strings, doubles, bytes, and byte arrays. Additionally, it includes functionality to send data over a network socket.
+This TypeScript library, `Hoffer.ts`, provides a convenient and efficient way to serialize and deserialize various data types for network communication. It offers functionalities for both writing and reading data in a structured format, making it ideal for building network protocols or exchanging data between applications.
 
-## Features
+**Key Features:**
 
-- Write and read integers, strings, doubles, bytes, and byte arrays
-- Dynamic handling of different data types with `putValue` and `getValue` methods
-- Efficient binary data management with a Buffer
-- Send data over a network socket
+- **Supported Data Types:** Handles numbers, strings, doubles, bytes, and byte arrays.
+- **Write Methods:**
+    - `putNumber(value: number)`: Writes an integer value.
+    - `putString(value: string)`: Writes a string, preceded by its length.
+    - `putDouble(value: number)`: Writes a double-precision floating-point number.
+    - `putByte(value: number)`: Writes a single byte value.
+    - `putByteArray(value: number[])`: Writes an array of bytes.
+    - `putValue(type: string, value: any)`: Generic method for writing data based on type.
+- **Read Methods:**
+    - `getNumber()`: Reads an integer value.
+    - `getString()`: Reads a string, respecting its preceding length.
+    - `getDouble()`: Reads a double-precision floating-point number.
+    - `getByte()`: Reads a single byte value.
+    - `getByteArray()`: Reads an array of bytes.
+    - `getValue(type: string)`: Generic method for reading data based on type.
+- **Buffer Management:**
+    - `reset()`: Clears the internal buffer for reuse.
+    - `getData()`: Retrieves the current data buffer for sending.
+    - `setData(data: Buffer)`: Sets the internal buffer with received data for reading.
+- **Network Integration:**
+    - `sendData(socket: net.Socket)`: Sends the data buffer through a provided socket connection (example usage provided, but requires `net` module import).
 
 ## Installation
 
@@ -29,8 +45,11 @@ yarn install
 First, import the `Hoffer` class in your TypeScript file:
 
 ```typescript
-import { Hoffer } from './hoffer';
-import * as net from 'net';
+import { Hoffer } from 'hoffer';
+```
+or
+```js
+const { Hoffer } = require("hoffer")
 ```
 
 ### Writing Data
@@ -59,9 +78,8 @@ hoffer.putValue('byteArray', [0x10, 0x20, 0x30]);
 Read the data back from the buffer:
 
 ```typescript
-const data = hoffer.getData();
 const readHoffer = new Hoffer();
-readHoffer.setData(data);
+readHoffer.setData(data); // the data == buffer
 
 const id = readHoffer.getNumber();
 const name = readHoffer.getString();
@@ -150,6 +168,3 @@ Sends the buffer data over the provided network socket.
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
-
-Bu Markdown formatındaki README dosyasını bir `README.txt` dosyasına kopyalayabilir ve kaydedebilirsiniz.
