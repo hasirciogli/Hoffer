@@ -1,7 +1,7 @@
 {
   "name": "hoffer",
-  "version": "1.0.4",
-  "description": "Network buffering library (Packgage Manager)",
+  "version": "1.0.5",
+  "description": "Network buffering library (Package Manager)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
